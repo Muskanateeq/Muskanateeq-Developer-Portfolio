@@ -21,12 +21,13 @@ export default function ProjectSection() {
       description: "Build a professional resume quickly with our user-friendly online platform. Enter your details, and our tool generates a polished resume tailored to highlight your skills, experience, and qualifications.",
       tech: "Html 5, Css 3, Javascript",
       image: "/WorkSection1/Thumbnail2.png",
-      githubLink: "https://github.com/Muskanateeq/Hackathon-Based-Resume-Builder",
-      vercelLink: "https://hackathon-based-resume-builder.vercel.app/"
+      githubLink: "https://github.com/Muskanateeq/Hackathon-based-dynamic-resume-builder",
+      vercelLink: "https://hackathon-based-dynamic-resume-builder.vercel.app/"
     },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showDescription, setShowDescription] = useState(false);
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
@@ -64,7 +65,18 @@ export default function ProjectSection() {
           >
             <h2 className="text-4xl font-bold text-teal-400">{currentProject.id}</h2>
             <h3 className="text-2xl font-semibold mt-2">{currentProject.title}</h3>
-            <p className="text-gray-400 mt-4 leading-relaxed">{currentProject.description}</p>
+            
+            {/* Description with Toggle */}
+            {showDescription && (
+              <p className="text-gray-400 mt-4 leading-relaxed text-start">{currentProject.description}</p>
+            )}
+            <button
+              onClick={() => setShowDescription(!showDescription)}
+              className="mt-2 text-teal-400 underline"
+            >
+              {showDescription ? "See Less" : "See More"}
+            </button>
+            
             <p className="mt-4 text-teal-400 font-semibold">{currentProject.tech}</p>
             <div className="flex justify-center md:justify-start mt-6 space-x-4">
               <motion.a

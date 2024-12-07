@@ -33,9 +33,20 @@ export default function ProjectSection() {
       githubLink: "https://github.com/Muskanateeq/Machine-Learning-Loan-Prediction-Model/blob/main/KNN_Classification.ipynb",
       vercelLink: "https://colab.research.google.com/drive/1pEsyOKCUiHpr9RaovCR0lySbqoXbf60E"
     },
+    {
+      id: "04",
+      title: "Linear Regression",
+      description: "Trained a Linear Regression model on a house prediction dataset to predict house price outcomes, enabling lenders to make data-driven decisions on house price applications.",
+      tech: "Python, Numpy, Pandas, Matplotlip, Seaborn, sklearn, scipy",
+      image: "/WorkSection4/Thumbnail3.png",
+      githubLink: "https://github.com/Muskanateeq/Machine-Learning-Loan-Prediction-Model/blob/main/KNN_Classification.ipynb",
+      vercelLink: "https://colab.research.google.com/drive/1pEsyOKCUiHpr9RaovCR0lySbqoXbf60E"
+    },
+    
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showDescription, setShowDescription] = useState(false);
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
@@ -73,7 +84,18 @@ export default function ProjectSection() {
           >
             <h2 className="text-4xl font-bold text-teal-400">{currentProject.id}</h2>
             <h3 className="text-2xl font-semibold mt-2">{currentProject.title}</h3>
-            <p className="text-gray-400 mt-4 leading-relaxed">{currentProject.description}</p>
+            
+            {/* Description with Toggle */}
+            {showDescription && (
+              <p className="text-gray-400 mt-4 leading-relaxed text-start">{currentProject.description}</p>
+            )}
+            <button
+              onClick={() => setShowDescription(!showDescription)}
+              className="mt-2 text-teal-400 underline"
+            >
+              {showDescription ? "See Less" : "See More"}
+            </button>
+            
             <p className="mt-4 text-teal-400 font-semibold">{currentProject.tech}</p>
             <div className="flex justify-center md:justify-start mt-6 space-x-4">
               <motion.a
@@ -106,7 +128,7 @@ export default function ProjectSection() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.8 }}
           >
-            <a href={currentProject.vercelLink} target="_blank" rel="noopener noreferrer">
+          <a href={currentProject.vercelLink} target="_blank" rel="noopener noreferrer">
             <Image
               src={currentProject.image}
               alt="Project thumbnail"

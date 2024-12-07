@@ -30,8 +30,8 @@ export default function ProjectSection() {
       description: "Created a Netflix clone that allows users to browse and stream movies and TV shows, featuring a user-friendly interface and responsive design.",
       tech: "Html 5, Css 3",
       image: "/WorkSection2/Thumbnail3.png",
-      githubLink: "https://github.com/Muskanateeq/Netflix-Website-Clone",
-      vercelLink: "https://netflix-website-clone-blond.vercel.app/"
+      githubLink: "https://github.com/Muskanateeq/Netflix-website",
+      vercelLink: "https://netflix-website-92rx-muskanateeqs-projects.vercel.app/"
     },
     {
       id: "04",
@@ -40,11 +40,12 @@ export default function ProjectSection() {
       tech: "Html 5, Css 3",
       image: "/WorkSection2/Thumbnail4.png",
       githubLink: "https://github.com/Muskanateeq/Simple-E-Commerce-Website",
-      vercelLink: "https://simple-e-commerce-website-seven.vercel.app/"
+      vercelLink: "https://e-commerce-website-tan-six.vercel.app/"
     },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showDescription, setShowDescription] = useState(false);
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
@@ -70,7 +71,7 @@ export default function ProjectSection() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          Modern Web Development
+          Frontend Development
         </motion.h1>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center mt-8 md:mt-12 space-y-8 md:space-y-0">
           {/* Project Details */}
@@ -82,7 +83,18 @@ export default function ProjectSection() {
           >
             <h2 className="text-4xl font-bold text-teal-400">{currentProject.id}</h2>
             <h3 className="text-2xl font-semibold mt-2">{currentProject.title}</h3>
-            <p className="text-gray-400 mt-4 leading-relaxed">{currentProject.description}</p>
+            
+            {/* Description with Toggle */}
+            {showDescription && (
+              <p className="text-gray-400 mt-4 leading-relaxed text-start">{currentProject.description}</p>
+            )}
+            <button
+              onClick={() => setShowDescription(!showDescription)}
+              className="mt-2 text-teal-400 underline"
+            >
+              {showDescription ? "See Less" : "See More"}
+            </button>
+            
             <p className="mt-4 text-teal-400 font-semibold">{currentProject.tech}</p>
             <div className="flex justify-center md:justify-start mt-6 space-x-4">
               <motion.a
@@ -115,7 +127,7 @@ export default function ProjectSection() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.8 }}
           >
-            <a href={currentProject.vercelLink} target="_blank" rel="noopener noreferrer">
+          <a href={currentProject.vercelLink} target="_blank" rel="noopener noreferrer">
             <Image
               src={currentProject.image}
               alt="Project thumbnail"

@@ -78,7 +78,7 @@ export default function ResumeSection() {
               <p>Intermediate</p>
               <p>2021-2023</p>
               <p>Specializing in Generative AI</p>
-              <p>2024-till in process</p>
+              <p>2023-till in process</p>
               <p>Exploring AI-data science</p>
               <p>2024-till in process</p>
             </div>
@@ -133,7 +133,7 @@ export default function ResumeSection() {
             transition={{ duration: 0.5, delay: 0.8 }}
           >
             <h3 className="text-lg font-semibold">EXPERIENCE:</h3>
-            <h2 className='text-lg mb-1'>2023-2024 (Teaching) | At Aptech Learning Institute</h2>
+            <h2 className='text-lg mb-1'>Feb 2024 - Oct 2024 (Teaching) | At Aptech Learning Institute</h2>
             <p className="text-sm mt-2">
             Taught foundational and advanced concepts in frontend development, including HTML, CSS, JavaScript, and frameworks. Provided hands-on guidance to students in building responsive and user-friendly web applications to help them improve their practical coding skills. Assisted in updating teaching materials and projects to align with students learning needs and market demands.
             </p>

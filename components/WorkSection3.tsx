@@ -1,9 +1,14 @@
 "use client";
+import { useState } from "react"
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import Image from "next/image";
 import { motion } from 'framer-motion';
 
+
+
 export default function ProjectSection() {
+  const [showDescription, setShowDescription] = useState(false);
+  
   return (
     <section className="bg-gray-900 text-white min-h-screen py-24 px-4 md:px-8 lg:px-16">
       <motion.div 
@@ -30,7 +35,18 @@ export default function ProjectSection() {
           >
             <h2 className="text-4xl font-bold text-teal-400">01</h2>
             <h3 className="text-2xl font-semibold mt-2">Supermarket Insights</h3>
-            <p className="text-gray-400 mt-4 leading-relaxed">Analyzed a supermarket dataset to identify top-selling products in each branch and highlight branches with varying customer ratios. Insights will guide strategies to boost customer engagement in lower-performing branches and improve overall sales.</p>
+
+            {/* Description with Toggle */}
+            {showDescription && (
+              <p className="text-gray-400 mt-4 leading-relaxed text-start">Analyzed a supermarket dataset to identify top-selling products in each branch and highlight branches with varying customer ratios. Insights will guide strategies to boost customer engagement in lower-performing branches and improve overall sales.</p>
+            )}
+            <button
+              onClick={() => setShowDescription(!showDescription)}
+              className="mt-2 text-teal-400 underline"
+            >
+              {showDescription ? "See Less" : "See More"}
+            </button>
+
             <p className="mt-4 text-teal-400 font-semibold">Python, Matplotlip, Seaborn, Numpy, Pandas</p>
             <div className="flex justify-center md:justify-start mt-6 space-x-4">
               <motion.a
