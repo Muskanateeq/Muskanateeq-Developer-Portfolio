@@ -11,17 +11,17 @@ interface Skill {
 }
 
 const skills: Skill[] = [
-  { name: "HTML", level: 95 },
-  { name: "CSS", level: 90 },
+  { name: "HTML", level: 98 },
+  { name: "CSS", level: 95 },
   { name: "JavaScript", level: 80 },
   { name: "TypeScript", level: 90 },
-  { name: "React.js", level: 60 },
-  { name: "Next.js", level: 80 },
+  { name: "React.js", level: 80 },
+  { name: "Next.js", level: 90 },
   { name: "UI,UX designer", level: 95 },
   { name: "Docker", level: 40 },
-  { name: "Python", level: 90 },
-  { name: "Data Analyst", level: 92 },
-  { name: "Machine Learning", level: 80 },
+  { name: "Python", level: 80 },
+  { name: "Data Analyst", level: 62 },
+  { name: "Machine Learning", level: 50 },
 ];
 
 export default function ResumeSection() {
@@ -77,9 +77,9 @@ export default function ResumeSection() {
               <p>2018-2020</p>
               <p>Intermediate</p>
               <p>2021-2023</p>
+              <p>Specializing in Modern Web development</p>
+              <p>2024-2025</p>
               <p>Specializing in Generative AI</p>
-              <p>2023-till in process</p>
-              <p>Exploring AI-data science</p>
               <p>2024-till in process</p>
             </div>
           </motion.div>
@@ -133,9 +133,9 @@ export default function ResumeSection() {
             transition={{ duration: 0.5, delay: 0.8 }}
           >
             <h3 className="text-lg font-semibold">EXPERIENCE:</h3>
-            <h2 className='text-lg mb-1'>Feb 2024 - Oct 2024 (Teaching) | At Aptech Learning Institute</h2>
+            <h2 className='text-lg mb-1'>Senior Trainer – Governor Sindh Initiative for AI, Web3.0 & Metaverse Institute |Three Months</h2>
             <p className="text-sm mt-2">
-            Taught foundational and advanced concepts in frontend development, including HTML, CSS, JavaScript, and frameworks. Provided hands-on guidance to students in building responsive and user-friendly web applications to help them improve their practical coding skills. Assisted in updating teaching materials and projects to align with students learning needs and market demands.
+            During my specialization at the Governor Sindh Initiative for AI, Web3.0 & Metaverse Institute, I was assigned as a Senior Trainer for three months. In this role, I led comprehensive training sessions for junior team members, developing and delivering targeted programs on the Modern Web Development technology. I not only shared my technical expertise but also mentored and guided my peers to enhance their skills, ensuring they were well-prepared to meet the challenges of a rapidly evolving digital landscape.
             </p>
           </motion.div>
 

@@ -11,8 +11,8 @@ const Stats = () => {
 
   useEffect(() => {
     const yearsTimer = setInterval(() => {
-      setYears((prev) => (prev < 8 ? prev + 1 : 8));
-    }, 300);
+      setYears((prev) => (prev < 3 ? prev + 1 : 3));
+    }, 500);
 
     const projectsTimer = setInterval(() => {
       setProjects((prev) => (prev < 24 ? prev + 1 : 24));
@@ -24,7 +24,7 @@ const Stats = () => {
 
     const commitsTimer = setInterval(() => {
       setCommits((prev) => (prev < 499 ? prev + 12 : 499));
-    }, 50);
+    }, 100);
 
     return () => {
       clearInterval(yearsTimer);

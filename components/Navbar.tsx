@@ -1,18 +1,17 @@
-
 "use client";
 import { useState } from 'react';
 import { motion } from 'framer-motion'; 
 import Link from "next/link";
 
 const Navbar = () => {
-  const [active, setActive] = useState<string>('Home'); // Set 'Home' as the default active item
+  const [active, setActive] = useState<string>('Home'); // Default active item
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Services', href: '/servicessection' },
     { name: 'Resume', href: '/resumesection' },
-    { name: 'Work', href: '/worksection' },
+    { name: 'Project', href: '/worksection' },
     { name: 'Contact', href: '/contactsection' }
   ];
 
@@ -38,12 +37,14 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.3, delay: index * 0.1 }} 
-            className={`cursor-pointer transition-all duration-200 transform hover:scale-105 ${
-              active === item.name ? 'text-teal-400 underline underline-offset-4' : 'text-white'
-            }`}
             onClick={() => setActive(item.name)}
+            className={`cursor-pointer transition-all duration-200 transform hover:scale-105 ${
+              active === item.name
+                ? 'text-teal-400 border-b-2 border-teal-400'
+                : 'text-white'
+            }`}
           >
-            <Link href={item.href} className="hover:text-teal-400 hover:underline underline-offset-4">
+            <Link href={item.href}>
               {item.name}
             </Link>
           </motion.li>
@@ -74,9 +75,11 @@ const Navbar = () => {
                 setActive(item.name);
                 setMenuOpen(false);
               }}
-              className={`text-2xl py-4 ${
-                active === item.name ? 'text-teal-400 underline underline-offset-4' : 'text-white'
-              } hover:text-teal-400 hover:underline underline-offset-4 transition-colors duration-200`}
+              className={`text-2xl py-4 transition-colors duration-200 ${
+                active === item.name
+                  ? 'text-teal-400 border-b-2 border-teal-400'
+                  : 'text-white'
+              }`}
             >
               <Link href={item.href}>
                 {item.name}
@@ -97,3 +100,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

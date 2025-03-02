@@ -8,39 +8,12 @@ export default function ProjectSection() {
   const projects = [
     {
       id: "01",
-      title: "Amazon Clone",
-      description: "Developed an Amazon clone to showcase my web development skills and understanding of e-commerce platforms.",
-      tech: "Html 5, Css 3",
+      title: "Resume Builder",
+      description: "Build a professional resume quickly with our user-friendly online platform. Enter your details, and our tool generates a polished resume tailored to highlight your skills, experience, and qualifications.",
+      tech: "Html 5, Css 3, Javascript",
       image: "/WorkSection2/Thumbnail1.png",
-      githubLink: "https://github.com/Muskanateeq/Amazon-Website-Clone",
-      vercelLink: "https://amazon-website-clone-eosin.vercel.app/"
-    },
-    {
-      id: "02",
-      title: "Food Delivery Website",
-      description: "Created a responsive food delivery website featuring an intuitive interface for users to browse menus, and place orders. This project showcases my front-end web development skills and commitment to delivering an excellent user experience.",
-      tech: "Html 5, Css 3",
-      image: "/WorkSection2/Thumbnail2.png",
-      githubLink: "https://github.com/Muskanateeq/Food-Delivery-Website",
-      vercelLink: "https://food-delivery-website-lyart-nu.vercel.app/?vercelToolbarCode=V444PSdRRk2wnjH"
-    },
-    {
-      id: "03",
-      title: "Netflix Clone",
-      description: "Created a Netflix clone that allows users to browse and stream movies and TV shows, featuring a user-friendly interface and responsive design.",
-      tech: "Html 5, Css 3",
-      image: "/WorkSection2/Thumbnail3.png",
-      githubLink: "https://github.com/Muskanateeq/Netflix-website",
-      vercelLink: "https://netflix-website-92rx-muskanateeqs-projects.vercel.app/"
-    },
-    {
-      id: "04",
-      title: "E-Commerce Website",
-      description: "Created an e-commerce website. This project showcases my web development skills , with a focus on responsive design for a seamless user experience.",
-      tech: "Html 5, Css 3",
-      image: "/WorkSection2/Thumbnail4.png",
-      githubLink: "https://github.com/Muskanateeq/Simple-E-Commerce-Website",
-      vercelLink: "https://e-commerce-website-tan-six.vercel.app/"
+      githubLink: "https://github.com/Muskanateeq/Hackathon-3-Full-Stack-Project",
+      vercelLink: "https://hackathon-3-full-stack-website.vercel.app/"
     },
   ];
 
