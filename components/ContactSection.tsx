@@ -42,7 +42,7 @@ export default function ContactSection() {
             Let&apos;s work together
           </h2>
           <p className="mt-2 text-gray-400">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Feel free to reach out and let’s build something great together!
           </p>
           <form className="mt-4 space-y-4">
             <div className="flex space-x-4">
@@ -94,7 +94,7 @@ export default function ContactSection() {
                 <option>Service 1 (Frontend Development)</option>
                 <option>Service 2 (Modern Web Development)</option>
                 <option>Service 3 (UI/UX Designing)</option>
-                <option>Service 6 (Logo Designing)</option>
+                <option>Service 4 (Artificial Intelligence)</option>
               </motion.select>
             </div>
             <motion.textarea
@@ -143,7 +143,7 @@ export default function ContactSection() {
             </svg>
             <div>
               <p className="font-semibold">Phone</p>
-              <p>📞(+92) 3152068370 | (+92) 3302974589</p>
+              <p>📞(+92) 3152068370</p>
             </div>
           </div>
           <div
@@ -169,7 +169,7 @@ export default function ContactSection() {
             </svg>
             <div>
               <p className="font-semibold">Email</p>
-              <p>📧ateeq.in.com@gmail.com</p>
+              <p>📧Muskan.in.com786@gmail.com</p>
             </div>
           </div>
           <div
@@ -195,7 +195,7 @@ export default function ContactSection() {
             </svg>
             <div>
               <p className="font-semibold">Address</p>
-              <p>🏠Sader, Sector 2-D House 481, Karachi, Pakistan</p>
+              <p>🏠Sadder, Sector 2-D House 481, Karachi, Pakistan</p>
             </div>
           </div>
         </div>

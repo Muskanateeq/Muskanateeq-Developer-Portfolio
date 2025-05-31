@@ -1,11 +1,12 @@
 "use client";
 import { useState } from 'react';
-import { motion } from 'framer-motion'; 
+import { motion } from 'framer-motion';
 import Link from "next/link";
+import { usePathname } from 'next/navigation'; 
 
 const Navbar = () => {
-  const [active, setActive] = useState<string>('Home'); // Default active item
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname(); 
 
   const navItems = [
     { name: 'Home', href: '/' },
@@ -17,11 +18,10 @@ const Navbar = () => {
 
   return (
     <nav className="flex justify-between items-center py-4 px-8 md:px-16 lg:px-32 bg-gray-900 fixed w-full top-0 z-50">
-      {/* Logo with Animation */}
       <motion.h1
-        initial={{ opacity: 0, y: -20 }} 
-        animate={{ opacity: 1, y: 0 }} 
-        transition={{ duration: 0.3 }} 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
         className="text-2xl font-bold text-white flex items-center cursor-pointer"
       >
         <Link href="/">
@@ -29,26 +29,26 @@ const Navbar = () => {
         </Link>
       </motion.h1>
 
-      {/* Desktop Navbar Links */}
+      {/* Desktop Nav */}
       <ul className="hidden md:flex space-x-6">
-        {navItems.map((item, index) => (
-          <motion.li
-            key={item.name}
-            initial={{ opacity: 0, y: -20 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.3, delay: index * 0.1 }} 
-            onClick={() => setActive(item.name)}
-            className={`cursor-pointer transition-all duration-200 transform hover:scale-105 ${
-              active === item.name
-                ? 'text-teal-400 border-b-2 border-teal-400'
-                : 'text-white'
-            }`}
-          >
-            <Link href={item.href}>
-              {item.name}
-            </Link>
-          </motion.li>
-        ))}
+        {navItems.map((item, index) => {
+          const isActive = pathname === item.href;
+          return (
+            <motion.li
+              key={item.name}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              className={`cursor-pointer transition-all duration-200 transform hover:scale-105 ${
+                isActive
+                  ? 'text-teal-400 border-b-2 border-teal-400'
+                  : 'text-white'
+              }`}
+            >
+              <Link href={item.href}>{item.name}</Link>
+            </motion.li>
+          );
+        })}
       </ul>
 
       {/* Mobile Menu Icon */}
@@ -62,31 +62,28 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu */}
       {menuOpen && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-90 flex flex-col items-center justify-center z-40">
-          {navItems.map((item, index) => (
-            <motion.div
-              key={item.name}
-              initial={{ opacity: 0, y: -20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ duration: 0.3, delay: index * 0.1 }} 
-              onClick={() => {
-                setActive(item.name);
-                setMenuOpen(false);
-              }}
-              className={`text-2xl py-4 transition-colors duration-200 ${
-                active === item.name
-                  ? 'text-teal-400 border-b-2 border-teal-400'
-                  : 'text-white'
-              }`}
-            >
-              <Link href={item.href}>
-                {item.name}
-              </Link>
-            </motion.div>
-          ))}
-          {/* Close Button */}
+          {navItems.map((item, index) => {
+            const isActive = pathname === item.href;
+            return (
+              <motion.div
+                key={item.name}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                onClick={() => setMenuOpen(false)}
+                className={`text-2xl py-4 transition-colors duration-200 ${
+                  isActive
+                    ? 'text-teal-400 border-b-2 border-teal-400'
+                    : 'text-white'
+                }`}
+              >
+                <Link href={item.href}>{item.name}</Link>
+              </motion.div>
+            );
+          })}
           <button
             onClick={() => setMenuOpen(false)}
             className="absolute top-4 right-4 text-white text-2xl focus:outline-none"
@@ -100,4 +97,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 

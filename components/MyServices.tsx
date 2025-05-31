@@ -1,4 +1,3 @@
-
 "use client"; 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion'; 
@@ -19,12 +18,12 @@ const Stats = () => {
     }, 100);
 
     const technologiesTimer = setInterval(() => {
-      setTechnologies((prev) => (prev < 15 ? prev + 1 : 19));
-    }, 225);
+      setTechnologies((prev) => (prev < 15 ? prev + 1 : 15));
+    }, 210);
 
     const clientsTimer = setInterval(() => {
-      setClients((prev) => (prev < 100 ? prev + 1 : 100)); 
-    }, 30);
+      setClients((prev) => (prev < 12 ? prev + 1 : 12)); // Counting up to 12 clients
+    }, 150);
 
     return () => {
       clearInterval(yearsTimer);
@@ -81,7 +80,7 @@ const Stats = () => {
         <h2 className="text-4xl font-bold text-teal-400 flex items-center justify-center">
           {clients}<span className="text-xl ml-1">+</span>
         </h2>
-        <p>Accuracy</p>
+        <p>Satisfied clients</p>
       </motion.div>
     </div>
   );

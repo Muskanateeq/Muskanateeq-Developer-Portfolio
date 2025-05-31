@@ -2,7 +2,9 @@ import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import Stats from '../components/Stats';
 import ServiceSection from '../components/ServiceSection'
+import MySkills from "../components/MySkills"
 import WorkSection1 from '../components/WorkSection1'
+import WorkSection2 from '../components/WorkSection2'
 import ContactSection from '../components/ContactSection';
 
 export default function Home() {
@@ -15,7 +17,9 @@ export default function Home() {
         <Stats />
         </main>
         <ServiceSection />
+        <MySkills/>
         <WorkSection1/>
+        <WorkSection2/>
         <ContactSection/>
       </main>
     </div>

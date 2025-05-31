@@ -52,7 +52,7 @@ export default function Footer() {
             className="flex space-x-4"
           >
             <motion.a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/muskan-muhammad-atiq/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-teal-400 transition-colors duration-300"
@@ -67,7 +67,7 @@ export default function Footer() {
               <span className="sr-only">LinkedIn</span>
             </motion.a>
             <motion.a
-              href="https://github.com"
+              href="https://github.com/Muskanateeq/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-teal-400 transition-colors duration-300"

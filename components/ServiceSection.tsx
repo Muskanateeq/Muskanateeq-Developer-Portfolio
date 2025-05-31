@@ -23,9 +23,9 @@ export default function Services() {
     },
     {
       id: "06",
-      title: "Logo Design",
+      title: "Artificial Intelligence",
       description:
-        "We craft memorable, meaningful logos that capture the essence of your brand and make a lasting impression on your audience.",
+        "We integrate intelligent systems into digital solutions, enabling smarter automation, data-driven decisions, and enhanced user experiences through AI-powered features.",
     },
   ];
 

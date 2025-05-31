@@ -19,9 +19,12 @@ const skills: Skill[] = [
   { name: "Next.js", level: 90 },
   { name: "UI,UX designer", level: 95 },
   { name: "Docker", level: 40 },
-  { name: "Python", level: 80 },
+  { name: "Python", level: 95 },
   { name: "Data Analyst", level: 62 },
-  { name: "Machine Learning", level: 50 },
+  { name: "Machine Learning", level: 60 },
+  { name: "Deep Learning", level: 50 },
+  { name: "Computer Vision", level: 40 },
+  { name: "Generative AI", level: 30 },
 ];
 
 export default function ResumeSection() {
@@ -48,7 +51,7 @@ export default function ResumeSection() {
               />
             </div>
             <h2 className="text-teal-400 mt-4 text-xl font-bold">Muskan Ateeq</h2>
-            <p className="text-sm">Frontend Developer</p>
+            <p className="text-sm">Modern AI Web Developer</p>
           </div>
 
           <motion.div
@@ -60,7 +63,9 @@ export default function ResumeSection() {
             <h3 className="text-teal-400 text-lg font-semibold text-center">PROFILE:</h3>
             <div className="h-px bg-white my-2"></div>
             <p className="text-xs font-light leading-tight text-center">
-            I&apos;m a skilled Frontend developer with hands-on experience in creating visually appealing and user-friendly web applications. My expertise includes HTML, CSS, JavaScript, and TypeScript, with a strong focus on innovative frameworks like Next.js. Alongside these, I am also proficient in Python, data analysis, and machine learning, which allow me to approach projects with a versatile and data-driven perspective. I have a proven track record of designing responsive layouts and implementing interactive features to enhance the user experience. With a keen eye for detail and a commitment to staying updated with the latest web technologies, I am dedicated to delivering high-quality solutions that meet both user needs and business objectives.
+            I&apos;m a Modern AI & Web Developer with a passion for combining the power of web technologies with artificial intelligence to build intelligent, interactive, and efficient applications.
+            I have hands-on experience in front-end development using HTML, CSS, JavaScript, TypeScript, React.js, Next.js, Tailwind CSS, and Sanity CMS, with a strong focus on creating clean UIs, responsive layouts, and smooth user experiences.
+            In the field of AI and Data, I have learned Machine Learning, Deep Learning, Computer Vision, and basics of Generative AI. I&apos;m also skilled in data cleaning, preprocessing, and data analysis, which are essential for training accurate and effective AI models.With a commitment to continuous learning and practical implementation, I aim to bridge the gap between AI and modern web development by creating innovative, smart web solutions.
             </p>
           </motion.div>
 
@@ -77,9 +82,9 @@ export default function ResumeSection() {
               <p>2018-2020</p>
               <p>Intermediate</p>
               <p>2021-2023</p>
-              <p>Specializing in Modern Web development</p>
+              <p>Specializing in Artificial Intelligence</p>
               <p>2024-2025</p>
-              <p>Specializing in Generative AI</p>
+              <p>Diploma in Agentic AI</p>
               <p>2024-till in process</p>
             </div>
           </motion.div>
@@ -107,7 +112,7 @@ export default function ResumeSection() {
               {/* First four skills in a row */}
               <div className="flex flex-wrap justify-center w-full md:w-[90%] max-w-[400px] mt-2">
                 {skills.map((skill) => (
-                  <div key={skill.name} className="w-20 mx-2 mt-3">
+                  <div key={skill.name} className="w-16 mx-2 mt-3">
                     <CircularProgressbar
                       value={skill.level}
                       text={`${skill.level}%`}
@@ -133,9 +138,9 @@ export default function ResumeSection() {
             transition={{ duration: 0.5, delay: 0.8 }}
           >
             <h3 className="text-lg font-semibold">EXPERIENCE:</h3>
-            <h2 className='text-lg mb-1'>Senior Trainer – Governor Sindh Initiative for AI, Web3.0 & Metaverse Institute |Three Months</h2>
+            <h2 className='text-lg mb-1'>Senior Trainer – Governor Sindh Initiative for AI, Web3.0 & Metaverse Institute </h2>
             <p className="text-sm mt-2">
-            During my specialization at the Governor Sindh Initiative for AI, Web3.0 & Metaverse Institute, I was assigned as a Senior Trainer for three months. In this role, I led comprehensive training sessions for junior team members, developing and delivering targeted programs on the Modern Web Development technology. I not only shared my technical expertise but also mentored and guided my peers to enhance their skills, ensuring they were well-prepared to meet the challenges of a rapidly evolving digital landscape.
+            During my specialization at the Governor Sindh Initiative for AI, Web3.0 & Metaverse Institute, I was assigned as a Senior Trainer. In this role, I led comprehensive training sessions for junior team members, developing and delivering targeted programs on the Modern Web Development technology. I not only shared my technical expertise but also mentored and guided my peers to enhance their skills, ensuring they were well-prepared to meet the challenges of a rapidly evolving digital landscape.
             </p>
           </motion.div>
 
@@ -147,8 +152,8 @@ export default function ResumeSection() {
             transition={{ duration: 0.5, delay: 1 }}
           >
             <h3 className="text-lg font-semibold">CONTACT:</h3>
-            <p>📞 03302974589 | 03152068370</p>
-            <p>📧 ateeq.in.com@gmail.com</p>
+            <p>📞 03152068370</p>
+            <p>📧 muskan.in.com786@gmail.com</p>
             <p>🏠 Sadder, Sector 2-D House 481, Karachi, Pakistan</p>
           </motion.div>
         </motion.div>

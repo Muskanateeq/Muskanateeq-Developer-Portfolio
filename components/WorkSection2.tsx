@@ -1,133 +1,308 @@
 "use client";
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 import Image from "next/image";
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { motion } from "framer-motion";
 
 export default function ProjectSection() {
-  const projects = [
-    {
-      id: "01",
-      title: "Resume Builder",
-      description: "Build a professional resume quickly with our user-friendly online platform. Enter your details, and our tool generates a polished resume tailored to highlight your skills, experience, and qualifications.",
-      tech: "Html 5, Css 3, Javascript",
-      image: "/WorkSection2/Thumbnail1.png",
-      githubLink: "https://github.com/Muskanateeq/Hackathon-3-Full-Stack-Project",
-      vercelLink: "https://hackathon-3-full-stack-website.vercel.app/"
-    },
-  ];
+  // Memoize the projects array to prevent unnecessary re-renders
+  const projects = useMemo(
+    () => [
+      {
+        id: "01",
+        title: "Plant Disease Detection",
+        description:
+          "Built a deep learning based plant disease detection model using PyTorch library that identifies diseases from plant images using CNNs. Helps in early diagnosis to support better crop health.",
+        tech: "Python, Numpy, Pandas, Matplotlip, Seaborn, PyTorch",
+        image: "/WorkSection2/plant img.jpeg",
+        githubLink:
+          "https://github.com/Muskanateeq/Plant-Disease-Detection-Model",
+        ColabLink:
+          "https://colab.research.google.com/drive/1gQ7xJ0-f6rz3bUj9G6WHfDxLiNBkARHC",
+      },
+      {
+        id: "02",
+        title: "Spam Email Classification",
+        description:
+          "Build a ML-based spam email detection model using TensorFlow library that accurately classifies emails as spam or real. The model learns patterns from email text to identify unwanted messages and improve email filtering.",
+        tech: "Python, Numpy, Pandas, Matplotlip, Seaborn, TensorFlow",
+        image: "/WorkSection2/spam img.png",
+        githubLink: "https://github.com/Muskanateeq/Spam-Email-Classification",
+        ColabLink:
+          "https://colab.research.google.com/drive/1wBbgobOBHZPFxOMrQwRI8_NAdPO8xNRb",
+      },
+      {
+        id: "03",
+        title: "House Price Prediction",
+        description:
+          "Built an ML-based house price prediction model using Decision Tree algorithm. The model predicts house prices based on key features, offering clear and interpretable decision paths.",
+        tech: "Python, Numpy, Pandas, Matplotlip, Seaborn, sklearn, scipy",
+        image: "/WorkSection2/house img.jpg",
+        githubLink:
+          "https://github.com/Muskanateeq/ML-Based-House-Price-Prediction-Model",
+        ColabLink:
+          "https://colab.research.google.com/drive/1Ss1UFxHeYhLFX8ZXdo0osdJaJphwK3vm",
+      },
+      {
+        id: "04",
+        title: "Loan Approval Prediction",
+        description:
+          "Build a loan approval prediction model using multiple machine learning algorithms including KNN, Logistic Regression, and Decision Tree. The model analyzes applicant data to predict loan approval status, improving decision-making in financial services.",
+        tech: "Python, Numpy, Pandas, Matplotlip, Seaborn, sklearn, scipy",
+        image: "/WorkSection2/loan approval imag.png",
+        githubLink:
+          "https://github.com/Muskanateeq/Machine-Learning-Loan-Prediction-Model",
+        ColabLink:
+          "https://colab.research.google.com/drive/1pEsyOKCUiHpr9RaovCR0lySbqoXbf60E",
+      },
+      {
+        id: "04",
+        title: "Car Price Prediction",
+        description:
+          "Developed a car price prediction model using the Decision Tree algorithm. The model analyzes various car features to estimate accurate prices, helping users make informed buying or selling decisions.",
+        tech: "Python, Numpy, Pandas, Matplotlip, Seaborn, sklearn, scipy",
+        image: "/WorkSection2/car img.jpg",
+        githubLink:
+          "https://github.com/Muskanateeq/ML-Based-Car-Price-Prediction-Model",
+        ColabLink:
+          "https://colab.research.google.com/drive/1bzYwX8m79JLFVUEzebtgGhbFFarsuuOm",
+      },
+    ],
+    []
+  );
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [showDescription, setShowDescription] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+  // Scroll to the selected project
+  const scrollToProject = useCallback(
+    (index: number) => {
+      if (containerRef.current) {
+        const container = containerRef.current;
+        const projectWidth = container.scrollWidth / projects.length;
+        container.scrollTo({
+          left: index * projectWidth,
+          behavior: "smooth",
+        });
+      }
+    },
+    [projects.length]
+  );
+
+  // Auto slideshow functionality
+  useEffect(() => {
+    if (!isPaused) {
+      intervalRef.current = setInterval(() => {
+        setCurrentIndex((prevIndex) => {
+          const newIndex = (prevIndex + 1) % projects.length;
+          scrollToProject(newIndex);
+          return newIndex;
+        });
+      }, 5000); // Change slide every 5 seconds
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isPaused, projects, scrollToProject]);
+
+  // Pause auto slideshow when hovering over the projects
+  const handleMouseEnter = () => {
+    setIsPaused(true);
   };
 
-  const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
+  const handleMouseLeave = () => {
+    setIsPaused(false);
   };
 
-  const currentProject = projects[currentIndex];
+  // Handle project click
+  const handleProjectClick = useCallback(
+    (index: number) => {
+      setCurrentIndex(index);
+      scrollToProject(index);
+
+      // Reset the timer when manually selecting a project
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        setIsPaused(false);
+      }
+    },
+    [scrollToProject]
+  );
 
   return (
     <section className="bg-gray-900 text-white min-h-screen py-24 px-4 md:px-8 lg:px-16">
-      <motion.div 
-        className="bg-gray-800 pr-16 pl-16 pt-7 pb-7 mx-4 md:mx-10 rounded-lg"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
+      <motion.div
+        className="bg-gray-800 px-8 py-12 mx-4 md:mx-10 rounded-lg"
+        initial={{
+          opacity: 0,
+          y: -20,
+          boxShadow: "0 0 0 rgba(45, 212, 191, 0)",
+        }}
+        animate={{ opacity: 1, y: 0, boxShadow: "0 0 0 rgba(45, 212, 191, 0)" }}
         transition={{ duration: 0.8 }}
+        whileHover={{ boxShadow: "0 0 25px rgba(45, 212, 191, 0.5)" }}
       >
-        <motion.h1 
-          className="text-3xl md:text-4xl font-bold text-gray-400 text-center"
+        {/* Existing Heading (optional – you can change or remove it if not needed) */}
+        <motion.h1
+          className="text-3xl md:text-4xl font-bold text-gray-400 text-center mb-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.8 }}
         >
-          Frontend Development
+          Artificial Intelligence
         </motion.h1>
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center mt-8 md:mt-12 space-y-8 md:space-y-0">
-          {/* Project Details */}
-          <motion.div 
-            className="flex-1 text-center md:text-left px-4 md:px-0"
-            initial={{ x: -50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-          >
-            <h2 className="text-4xl font-bold text-teal-400">{currentProject.id}</h2>
-            <h3 className="text-2xl font-semibold mt-2">{currentProject.title}</h3>
-            
-            {/* Description with Toggle */}
-            {showDescription && (
-              <p className="text-gray-400 mt-4 leading-relaxed text-start">{currentProject.description}</p>
-            )}
-            <button
-              onClick={() => setShowDescription(!showDescription)}
-              className="mt-2 text-teal-400 underline"
-            >
-              {showDescription ? "See Less" : "See More"}
-            </button>
-            
-            <p className="mt-4 text-teal-400 font-semibold">{currentProject.tech}</p>
-            <div className="flex justify-center md:justify-start mt-6 space-x-4">
-              <motion.a
-                href={currentProject.vercelLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 bg-gray-800 rounded-full hover:bg-gray-700 transition duration-300"
-                aria-label="External link"
-                whileHover={{ scale: 1.1 }}
-              >
-                <FaExternalLinkAlt className="text-white" />
-              </motion.a>
-              <motion.a
-                href={currentProject.githubLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 bg-gray-800 rounded-full hover:bg-gray-700 transition duration-300"
-                aria-label="GitHub link"
-                whileHover={{ scale: 1.1 }}
-              >
-                <FaGithub className="text-white" />
-              </motion.a>
-            </div>
-          </motion.div>
 
-          {/* Project Image and Navigation */}
-          <motion.div 
-            className="flex-1 relative h-72 w-full max-w-md mx-auto md:mx-0"
-            initial={{ x: 50, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-          >
-          <a href={currentProject.vercelLink} target="_blank" rel="noopener noreferrer">
-            <Image
-              src={currentProject.image}
-              alt="Project thumbnail"
-              className="rounded-lg w-full h-full object-cover shadow-lg"
-              width={7000}
-              height={9000}
+        <div
+          ref={containerRef}
+          className="overflow-x-auto hide-scrollbar"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{ scrollSnapType: "x mandatory" }}
+        >
+          <div className="flex w-full">
+            {projects.map((project, index) => (
+              <motion.div
+                key={index}
+                className="min-w-full flex flex-col md:flex-row items-center gap-8 px-4"
+                style={{ scrollSnapAlign: "start" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: index * 0.2, duration: 0.5 }}
+                whileHover={{ scale: 1.01 }}
+              >
+                {/* Project Details */}
+                <div className="flex-1 text-center md:text-left">
+                  <motion.h2
+                    className="text-4xl font-bold text-teal-400"
+
+                  >
+                    {project.id}
+                  </motion.h2>
+                  <motion.h3
+                    className="text-2xl font-semibold mt-2"
+                  >
+                    {project.title}
+                  </motion.h3>
+
+                  <motion.p
+                    className="text-gray-400 mt-4 leading-relaxed text-start"
+                  >
+                    {project.description}
+                  </motion.p>
+
+                  <motion.p
+                    className="mt-4 text-teal-400 font-semibold"
+                    whileHover={{
+                      textShadow: "0 0 8px rgba(45, 212, 191, 0.7)",
+                    }}
+                  >
+                    {project.tech}
+                  </motion.p>
+
+                  <div className="flex justify-center md:justify-start mt-6 space-x-4">
+                    <motion.a
+                      href={project.ColabLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center w-10 h-10 bg-gray-800 rounded-full hover:bg-gray-700 transition duration-300"
+                      aria-label="External link"
+                      whileHover={{
+                        scale: 1.2,
+                        boxShadow: "0 0 15px rgba(45, 212, 191, 0.7)",
+                        backgroundColor: "#1f2937",
+                      }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <FaExternalLinkAlt className="text-white" />
+                    </motion.a>
+                    <motion.a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center w-10 h-10 bg-gray-800 rounded-full hover:bg-gray-700 transition duration-300"
+                      aria-label="GitHub link"
+                      whileHover={{
+                        scale: 1.2,
+                        boxShadow: "0 0 15px rgba(45, 212, 191, 0.7)",
+                        backgroundColor: "#1f2937",
+                      }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <FaGithub className="text-white" />
+                    </motion.a>
+                  </div>
+                </div>
+
+                {/* Project Image */}
+                <div className="flex-1 relative h-72 w-full max-w-md">
+                  <motion.a
+                    href={project.ColabLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.03 }}
+                  >
+                    <motion.div
+                      className="rounded-lg overflow-hidden w-full h-full shadow-lg"
+                      initial={{ boxShadow: "0 0 0 rgba(45, 212, 191, 0)" }}
+                      whileHover={{
+                        boxShadow: "0 0 25px rgba(45, 212, 191, 0.7)",
+                        scale: 1.03,
+                      }}
+                    >
+                      <Image
+                        src={project.image || "/placeholder.svg"}
+                        alt="Project thumbnail"
+                        className="w-full h-full object-cover"
+                        width={7000}
+                        height={9000}
+                      />
+                    </motion.div>
+                  </motion.a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        {/* Project Indicators */}
+        <div className="flex justify-center space-x-2 mt-12">
+          {projects.map((_, index) => (
+            <motion.button
+              key={index}
+              onClick={() => handleProjectClick(index)}
+              className={`w-3 h-3 rounded-full ${
+                index === currentIndex ? "bg-teal-400" : "bg-gray-600"
+              }`}
+              whileHover={{
+                scale: 1.5,
+                boxShadow: "0 0 8px rgba(45, 212, 191, 0.7)",
+              }}
+              whileTap={{ scale: 0.9 }}
+              animate={index === currentIndex ? { scale: [1, 1.2, 1] } : {}}
+              transition={
+                index === currentIndex
+                  ? { repeat: Number.POSITIVE_INFINITY, duration: 2 }
+                  : {}
+              }
             />
-            </a>
-            <div className="flex absolute bottom-4 right-4 space-x-2">
-              <motion.button
-                onClick={handlePrevious}
-                className="w-8 h-8 bg-teal-400 flex items-center justify-center text-gray-900 hover:bg-teal-300"
-                whileTap={{ scale: 0.9 }}
-              >
-                &lt;
-              </motion.button>
-              <motion.button
-                onClick={handleNext}
-                className="w-8 h-8 bg-teal-400 flex items-center justify-center text-gray-900 hover:bg-teal-300"
-                whileTap={{ scale: 0.9 }}
-              >
-                &gt;
-              </motion.button>
-            </div>
-          </motion.div>
+          ))}
         </div>
       </motion.div>
+
+      {/* Add CSS for hiding scrollbar */}
+      <style jsx global>{`
+        .hide-scrollbar {
+          -ms-overflow-style: none; /* IE and Edge */
+          scrollbar-width: none; /* Firefox */
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none; /* Chrome, Safari and Opera */
+        }
+      `}</style>
     </section>
   );
 }

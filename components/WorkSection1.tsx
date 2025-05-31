@@ -1,117 +1,133 @@
-"use client"
-import { FaExternalLinkAlt, FaGithub } from "react-icons/fa"
-import Image from "next/image"
-import { useState, useEffect, useRef, useCallback, useMemo } from "react"
-import { motion } from "framer-motion"
+"use client";
+import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import Image from "next/image";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { motion } from "framer-motion";
 
 export default function ProjectSection() {
   // Memoize the projects array to prevent unnecessary re-renders
-  const projects = useMemo(() => [
-    {
-      id: "01",
-      title: "Medical Website",
-      description:
-        "Book appointments quickly and easily with our medical website. Patients can view available slots, choose preferred dates and times, and confirm bookings with ease. Designed to provide healthcare services.",
-      tech: "React, Next js",
-      image: "/WorkSection1/Thumbnail1.png",
-      githubLink: "https://github.com/Muskanateeq/Appointment-booking-medical-website",
-      vercelLink: "https://appointment-booking-medical-website-uoat.vercel.app/",
-    },
-    {
-      id: "02",
-      title: "E-commerce Website",
-      description:
-        "Build a professional resume quickly with our user-friendly online platform. Enter your details, and our tool generates a polished resume tailored to highlight your skills, experience, and qualifications.",
-      tech: "React, Next js",
-      image: "/WorkSection1/Thumbnail2.png",
-      githubLink: "https://github.com/Muskanateeq/Hackathon-3-Full-Stack-Project",
-      vercelLink: "https://hackathon-3-full-stack-website.vercel.app/",
-    },
-    {
-      id: "03",
-      title: "Agentia World Website",
-      description:
-        "Build a professional resume quickly with our user-friendly online platform. Enter your details, and our tool generates a polished resume tailored to highlight your skills, experience, and qualifications.",
-      tech: "React, Next js",
-      image: "/WorkSection1/Thumbnail3.png",
-      githubLink: "https://github.com/Muskanateeq/Agentic-AI-World",
-      vercelLink: "https://agentic-ai-world.vercel.app/",
-    },
-  ], [])
+  const projects = useMemo(
+    () => [
+      {
+        id: "01",
+        title: "E-commerce Website",
+        description:
+          "Build a professional resume quickly with our user-friendly online platform. Enter your details, and our tool generates a polished resume tailored to highlight your skills, experience, and qualifications.",
+        tech: "Typescript, Next.js, Tailwindcss",
+        image: "/WorkSection1/Thumbnail2.png",
+        githubLink:
+          "http://github.com/Muskanateeq/E-commerce-Website",
+        vercelLink: "https://e-commerce-website-098.vercel.app/",
+      },
+      {
+        id: "02",
+        title: "Medical Website",
+        description:
+          "Book appointments quickly and easily with our medical website. Patients can view available slots, choose preferred dates and times, and confirm bookings with ease. Designed to provide healthcare services.",
+        tech: "Typescript, Next.js",
+        image: "/WorkSection1/Thumbnail1.png",
+        githubLink:
+          "https://github.com/Muskanateeq/Medical-Website",
+        vercelLink:
+          "https://medcare-medical-website.vercel.app/",
+      },
+      {
+        id: "03",
+        title: "Agentia World Website",
+        description:
+          "Build a professional resume quickly with our user-friendly online platform. Enter your details, and our tool generates a polished resume tailored to highlight your skills, experience, and qualifications.",
+        tech: "Typescript, Next js, Tailwindcss",
+        image: "/WorkSection1/Thumbnail3.png",
+        githubLink: "https://github.com/Muskanateeq/Agentic-AI-World",
+        vercelLink: "https://agentic-ai-world.vercel.app/",
+      },
+    ],
+    []
+  );
 
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Scroll to the selected project
-  const scrollToProject = useCallback((index: number) => {
-    if (containerRef.current) {
-      const container = containerRef.current
-      const projectWidth = container.scrollWidth / projects.length
-      container.scrollTo({
-        left: index * projectWidth,
-        behavior: "smooth",
-      })
-    }
-  }, [projects.length])
+  const scrollToProject = useCallback(
+    (index: number) => {
+      if (containerRef.current) {
+        const container = containerRef.current;
+        const projectWidth = container.scrollWidth / projects.length;
+        container.scrollTo({
+          left: index * projectWidth,
+          behavior: "smooth",
+        });
+      }
+    },
+    [projects.length]
+  );
 
   // Auto slideshow functionality
   useEffect(() => {
     if (!isPaused) {
       intervalRef.current = setInterval(() => {
         setCurrentIndex((prevIndex) => {
-          const newIndex = (prevIndex + 1) % projects.length
-          scrollToProject(newIndex)
-          return newIndex
-        })
-      }, 5000) // Change slide every 5 seconds
+          const newIndex = (prevIndex + 1) % projects.length;
+          scrollToProject(newIndex);
+          return newIndex;
+        });
+      }, 5000); // Change slide every 5 seconds
     }
 
     return () => {
       if (intervalRef.current) {
-        clearInterval(intervalRef.current)
+        clearInterval(intervalRef.current);
       }
-    }
-  }, [isPaused, projects, scrollToProject])
+    };
+  }, [isPaused, projects, scrollToProject]);
 
   // Pause auto slideshow when hovering over the projects
   const handleMouseEnter = () => {
-    setIsPaused(true)
-  }
+    setIsPaused(true);
+  };
 
   const handleMouseLeave = () => {
-    setIsPaused(false)
-  }
+    setIsPaused(false);
+  };
 
   // Handle project click
-  const handleProjectClick = useCallback((index: number) => {
-    setCurrentIndex(index)
-    scrollToProject(index)
+  const handleProjectClick = useCallback(
+    (index: number) => {
+      setCurrentIndex(index);
+      scrollToProject(index);
 
-    // Reset the timer when manually selecting a project
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-      setIsPaused(false)
-    }
-  }, [scrollToProject])
+      // Reset the timer when manually selecting a project
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        setIsPaused(false);
+      }
+    },
+    [scrollToProject]
+  );
 
   return (
     <section className="bg-gray-900 text-white min-h-screen py-24 px-4 md:px-8 lg:px-16">
       {/* New Top Heading */}
       <motion.h2
-          className="text-4xl font-bold text-center mb-8"
-          initial={{ opacity: 0, y: -50 }} // Slide down from top
-          animate={{ opacity: 1, y: 0 }} // End position
-          transition={{ duration: 0.5 }} // Animation duration
-        >
-          My Projects
-        </motion.h2>
+        className="text-4xl font-bold text-center mb-8"
+        initial={{ opacity: 0, y: -50 }} // Slide down from top
+        animate={{ opacity: 1, y: 0 }} // End position
+        transition={{ duration: 0.5 }} // Animation duration
+      >
+        My Projects
+      </motion.h2>
 
       <motion.div
-        className="bg-gray-800 px-8 py-12 mx-4 md:mx-10 rounded-lg shadow-xl"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
+        className="bg-gray-800 px-8 py-12 mx-4 md:mx-10 rounded-lg"
+        initial={{
+          opacity: 0,
+          y: -20,
+          boxShadow: "0 0 0 rgba(45, 212, 191, 0)",
+        }}
+        animate={{ opacity: 1, y: 0, boxShadow: "0 0 0 rgba(45, 212, 191, 0)" }}
         transition={{ duration: 0.8 }}
         whileHover={{ boxShadow: "0 0 25px rgba(45, 212, 191, 0.5)" }}
       >
@@ -145,29 +161,22 @@ export default function ProjectSection() {
               >
                 {/* Project Details */}
                 <div className="flex-1 text-center md:text-left">
-                  <motion.h2
-                    className="text-4xl font-bold text-teal-400"
-                    whileHover={{ scale: 1.05, textShadow: "0 0 8px rgba(45, 212, 191, 0.7)" }}
-                  >
+                  <motion.h2 className="text-4xl font-bold text-teal-400">
                     {project.id}
                   </motion.h2>
-                  <motion.h3
-                    className="text-2xl font-semibold mt-2"
-                    whileHover={{ scale: 1.05, textShadow: "0 0 8px rgba(255, 255, 255, 0.7)" }}
-                  >
+                  <motion.h3 className="text-2xl font-semibold mt-2">
                     {project.title}
                   </motion.h3>
 
-                  <motion.p
-                    className="text-gray-400 mt-4 leading-relaxed text-start"
-                    whileHover={{ textShadow: "0 0 5px rgba(255, 255, 255, 0.3)" }}
-                  >
+                  <motion.p className="text-gray-400 mt-4 leading-relaxed text-start">
                     {project.description}
                   </motion.p>
 
                   <motion.p
                     className="mt-4 text-teal-400 font-semibold"
-                    whileHover={{ textShadow: "0 0 8px rgba(45, 212, 191, 0.7)" }}
+                    whileHover={{
+                      textShadow: "0 0 8px rgba(45, 212, 191, 0.7)",
+                    }}
                   >
                     {project.tech}
                   </motion.p>
@@ -216,6 +225,7 @@ export default function ProjectSection() {
                   >
                     <motion.div
                       className="rounded-lg overflow-hidden w-full h-full shadow-lg"
+                      initial={{ boxShadow: "0 0 0 rgba(45, 212, 191, 0)" }}
                       whileHover={{
                         boxShadow: "0 0 25px rgba(45, 212, 191, 0.7)",
                         scale: 1.03,
@@ -241,11 +251,20 @@ export default function ProjectSection() {
             <motion.button
               key={index}
               onClick={() => handleProjectClick(index)}
-              className={`w-3 h-3 rounded-full ${index === currentIndex ? "bg-teal-400" : "bg-gray-600"}`}
-              whileHover={{ scale: 1.5, boxShadow: "0 0 8px rgba(45, 212, 191, 0.7)" }}
+              className={`w-3 h-3 rounded-full ${
+                index === currentIndex ? "bg-teal-400" : "bg-gray-600"
+              }`}
+              whileHover={{
+                scale: 1.5,
+                boxShadow: "0 0 8px rgba(45, 212, 191, 0.7)",
+              }}
               whileTap={{ scale: 0.9 }}
               animate={index === currentIndex ? { scale: [1, 1.2, 1] } : {}}
-              transition={index === currentIndex ? { repeat: Number.POSITIVE_INFINITY, duration: 2 } : {}}
+              transition={
+                index === currentIndex
+                  ? { repeat: Number.POSITIVE_INFINITY, duration: 2 }
+                  : {}
+              }
             />
           ))}
         </div>
@@ -262,5 +281,5 @@ export default function ProjectSection() {
         }
       `}</style>
     </section>
-  )
+  );
 }
